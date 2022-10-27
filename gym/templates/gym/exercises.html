@@ -1,0 +1,15 @@
+
+{% load custom_tags %}
+
+<h1>List of all exercises</h1>
+
+<ul>
+
+    {% for exercise in exercises %}
+
+    <li>{{ exercise.name }} {{ exercise.type }} <p><a href={{ exercise.name|search }} target="_blank">Search on Youtube</a></p>
+    </li>
+
+    {% endfor %}
+
+</ul>
