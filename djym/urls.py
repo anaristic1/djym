@@ -22,5 +22,5 @@ urlpatterns = [
 
     path('', views.home, name='home'),
     path('exercises/', views.all_exercises, name='all_exercises'),
-
+    path('exercises/<str:workout_type>', views.all_exercises, name='all_exercises'),
 ]

@@ -7,5 +7,8 @@ TODO
 
 ## Built With
 
-TODO
+Front: Bootstrap
+
+Back: Django
+
 

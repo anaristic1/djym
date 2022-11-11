@@ -1,15 +1,41 @@
-
+{% extends '../base.html'%}
 {% load custom_tags %}
 
-<h1>List of all exercises</h1>
+{% block content%}
 
-<ul>
+    <h1>List of all exercises</h1>
 
-    {% for exercise in exercises %}
+    <div class="input-group align-self-start col-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Sort by type</label>
+      </div>
+      <select class="custom-select" id="workout_type" onchange="sort_by_type()">
+          <option value='all' >ALL</option>
+          {% for t in e_type %}
+            <option value={{ t.type }}>{{ t.type }}</option>
+          {% endfor %}
+      </select>
+    </div>
 
-    <li>{{ exercise.name }} {{ exercise.type }} <p><a href={{ exercise.name|search }} target="_blank">Search on Youtube</a></p>
-    </li>
+    <h2>{{ message }}</h2>
 
-    {% endfor %}
+    <ul>
 
-</ul>
+        {% for exercise in exercises %}
+
+        <li>{{ exercise.name }} {{ exercise.type }} <p><a href={{ exercise.name|search }} target="_blank">Search on Youtube</a></p>
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+    <script>
+        function sort_by_type() {
+            var workout_type = document.getElementById('workout_type').value;
+            var url = "{% url 'all_exercises' %}";
+            document.location.href = url + workout_type;
+        }
+    </script>
+
+{% endblock %}
