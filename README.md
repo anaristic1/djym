@@ -1,5 +1,6 @@
 #  djym
-Django project for tracking gym excercise plans.
+This is for anyone who tracks their workout plan on paper or in Docs.
+
 
 ## Installation
 
