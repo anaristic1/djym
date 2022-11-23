@@ -23,8 +23,7 @@
 
         {% for exercise in exercises %}
 
-        <li>{{ exercise.name }} {{ exercise.type }} <p><a href={{ exercise.name|search }} target="_blank">Search on Youtube</a></p>
-        </li>
+        <li><a href="{% url 'view_exercise' exercise.pk %}">{{ exercise.name }}</a></li>
 
         {% endfor %}
 

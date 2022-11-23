@@ -19,8 +19,12 @@ from gym import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', views.login_user, name='login_user'),
+    path('logout/', views.logout_user, name='logout_user'),
 
     path('', views.home, name='home'),
     path('exercises/', views.all_exercises, name='all_exercises'),
     path('exercises/<str:workout_type>', views.all_exercises, name='all_exercises'),
+    path('exercise/<int:exercise_pk>', views.view_exercise, name='view_exercise'),
+    path('exercise/<int:exercise_pk>/delete', views.delete_exercise, name='delete_exercise'),
 ]
