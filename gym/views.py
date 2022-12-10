@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Exercise, ExerciseType
 from .forms import ExeForm
 
@@ -10,9 +11,15 @@ def home(request):
     return render(request, 'gym/home.html')
 
 
-@login_required
 def login_user(request):
-    pass
+    if request.method == 'GET':
+        return render(request, 'user/login.html',  {'form': AuthenticationForm()})
+    else:
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'user/login.html', {'form': AuthenticationForm(), 'error': 'Login failed. Try again.'})
+        login(request, user)
+        return redirect('home')
 
 
 @login_required
