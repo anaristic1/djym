@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Exercise, ExerciseType
+from .models import Exercise, ExerciseType, Workout
 from .forms import ExeForm
 
 
@@ -62,3 +62,21 @@ def delete_exercise(request, exercise_pk):
     if request.method == 'POST':
         exercise.delete()
         return redirect('all_exercises')
+
+
+@login_required
+def all_user_workouts(request):
+    message = ''
+    workouts = Workout.objects.filter(user=request.user)
+    if not workouts:
+        message = f'There are no workouts for user {request.user}!'
+
+    return render(request, 'user/workouts.html', {'workouts': workouts, 'message': message})
+
+
+@login_required
+def view_workout(request, workout_pk):
+    workout = get_object_or_404(Workout, pk=workout_pk)
+    return render(request, 'user/workout.html', {'workout': workout, })
+
+

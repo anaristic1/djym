@@ -1,0 +1,17 @@
+{% extends '../base.html'%}
+
+{% block content %}
+
+    <div class="col-md-6 offset-md-3">
+        <h1>My workouts</h1>
+
+        <ul  style="list-style-type: none;">
+            {% for workout in workouts %}
+                <li><a href="{% url 'view_workout' workout.pk %}">{{ workout.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h3>{{ message }}</h3>
+    </div>
+
+{% endblock %}
